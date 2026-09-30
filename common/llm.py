@@ -20,9 +20,25 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 RESULTS = ROOT / "results"
 
-MODEL = os.environ.get("HW2_MODEL", "gpt-5.6-luna")
-
 load_dotenv(ROOT / ".env")
+
+# Provider. The assignment's model is OpenAI gpt-5.6-luna. If only a GEMINI_API_KEY
+# is set (free tier, no card), the same code talks to Google's OpenAI-compatible
+# endpoint instead - the program sends exactly the same messages either way.
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+if os.environ.get("OPENAI_API_KEY", "").startswith("sk-") and os.environ["OPENAI_API_KEY"] != "sk-...":
+    PROVIDER = "openai"
+    MODEL = os.environ.get("HW2_MODEL", "gpt-5.6-luna")
+    MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "0"))
+elif os.environ.get("GEMINI_API_KEY"):
+    PROVIDER = "gemini"
+    MODEL = os.environ.get("HW2_MODEL", "gemini-2.5-flash")
+    # free tier allows ~10-15 requests per minute: space the calls out
+    MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "6.5"))
+else:
+    PROVIDER = None
+    MODEL = os.environ.get("HW2_MODEL", "gpt-5.6-luna")
+    MIN_INTERVAL = 0.0
 
 # Windows consoles default to cp1251/cp866 and would crash on Kazakh letters and ✓/→.
 for _s in (sys.stdout, sys.stderr):
@@ -82,12 +98,27 @@ _client = None
 def client():
     global _client
     if _client is None:
-        if not os.environ.get("OPENAI_API_KEY"):
-            sys.exit("OPENAI_API_KEY is not set. Copy .env.example to .env and put your key in it.")
         from openai import OpenAI
 
-        _client = OpenAI()
+        if PROVIDER == "openai":
+            _client = OpenAI()
+        elif PROVIDER == "gemini":
+            _client = OpenAI(api_key=os.environ["GEMINI_API_KEY"], base_url=GEMINI_BASE_URL)
+        else:
+            sys.exit("No API key. Put OPENAI_API_KEY=sk-... or GEMINI_API_KEY=... in .env (see .env.example).")
+        print(f"[provider: {PROVIDER}, model: {MODEL}]", flush=True)
     return _client
+
+
+_last_call = 0.0
+
+
+def _throttle() -> None:
+    global _last_call
+    wait = MIN_INTERVAL - (time.time() - _last_call)
+    if wait > 0:
+        time.sleep(wait)
+    _last_call = time.time()
 
 
 # Parameters that some models reject. If the API says a parameter is unsupported
@@ -102,7 +133,7 @@ def chat(messages: list[dict], *, json_mode: bool = True, max_tokens: int = 4000
     """
     kwargs: dict[str, Any] = {"model": MODEL, "messages": messages}
     optional = {
-        "max_completion_tokens": max_tokens,
+        ("max_tokens" if PROVIDER == "gemini" else "max_completion_tokens"): max_tokens,
         "reasoning_effort": "low",
     }
     if json_mode:
@@ -113,7 +144,8 @@ def chat(messages: list[dict], *, json_mode: bool = True, max_tokens: int = 4000
 
     from openai import BadRequestError, APIConnectionError, RateLimitError, APITimeoutError
 
-    for attempt in range(6):
+    for attempt in range(8):
+        _throttle()
         try:
             resp = client().chat.completions.create(**kwargs)
             break
@@ -125,8 +157,13 @@ def chat(messages: list[dict], *, json_mode: bool = True, max_tokens: int = 4000
             for k in bad:
                 _dropped.add(k)
                 kwargs.pop(k, None)
-        except (APIConnectionError, RateLimitError, APITimeoutError):
-            time.sleep(2 * (attempt + 1))
+        except RateLimitError as e:
+            if "quota" in str(e).lower() and "day" in str(e).lower():
+                sys.exit(f"Daily quota exhausted: {e}")
+            print(f"  (rate limited, waiting {15 * (attempt + 1)}s)", flush=True)
+            time.sleep(15 * (attempt + 1))
+        except (APIConnectionError, APITimeoutError):
+            time.sleep(3 * (attempt + 1))
     else:
         raise RuntimeError("model call failed after retries")
 
@@ -170,3 +207,14 @@ def count_tokens(text: str) -> int:
         return len(enc.encode(text))
     except Exception:
         return len(text) // 4
+
+
+if __name__ == "__main__":
+    # python -m common.llm         -> one test call
+    # python -m common.llm models  -> list the models your key can use
+    if sys.argv[1:] == ["models"]:
+        for m in client().models.list():
+            print(m.id)
+    else:
+        r = chat([{"role": "user", "content": 'Reply with {"ok": true} and nothing else.'}])
+        print(r)
