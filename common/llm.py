@@ -32,7 +32,7 @@ if os.environ.get("OPENAI_API_KEY", "").startswith("sk-") and os.environ["OPENAI
     MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "0"))
 elif os.environ.get("GEMINI_API_KEY"):
     PROVIDER = "gemini"
-    MODEL = os.environ.get("HW2_MODEL", "gemini-2.5-flash")
+    MODEL = os.environ.get("HW2_MODEL", "gemini-3.8-flash")
     # free tier allows ~10-15 requests per minute: space the calls out
     MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "6.5"))
 else:
