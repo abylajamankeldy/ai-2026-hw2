@@ -1,0 +1,321 @@
+{
+  "A": {
+    "calls": [
+      {
+        "kind": "turn",
+        "text": "Сәлеметсіз бе! My name is Daniyar Qoshan, applicant A-202.",
+        "prompt_tokens": 997,
+        "completion_tokens": 355,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, we found your record (A-202) but your file is missing the ID card document, which is required to process the grant. Please provide the ID card to continue.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I sent my transcript last week. Do I qualify for the study grant?",
+        "prompt_tokens": 1096,
+        "completion_tokens": 184,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, you meet the GPA and income requirements, but your file is still missing the required ID card document, so the grant cannot be granted until it is provided.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "My income band is 2 - my family's certificate says so.",
+        "prompt_tokens": 1189,
+        "completion_tokens": 174,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, your GPA and income band (2) meet the eligibility criteria, but the required ID card is still not on file, so we need that document before we can grant the scholarship.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "So how much would that come to, if it goes through?",
+        "prompt_tokens": 1287,
+        "completion_tokens": 236,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, if all required documents are provided, you would receive 150,000 KZT (the amount for income band 2). Please submit your ID card so we can finalize the grant.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I could not upload my id card because the scanner at home broke.",
+        "prompt_tokens": 1388,
+        "completion_tokens": 154,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, we still do not have your ID card on file, which is required along with your transcript to qualify. Please arrange to submit the ID card (e.g., by using another scanner or a different method) so we can complete your application.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I can only come to the office on Thursdays, I have lab all week otherwise.",
+        "prompt_tokens": 1502,
+        "completion_tokens": 157,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, you may bring your ID card to our office on Thursday; once we receive the ID card we can complete the review and, if all criteria are met, grant you 150,000 KZT.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "Also, does a scanned letter from my employer count, or does it have to be the original?",
+        "prompt_tokens": 1612,
+        "completion_tokens": 227,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, the grant only requires a transcript and an ID card; a scanned employer letter is not needed for eligibility. Your ID card may be submitted as a clear scanned copy or the original document, as long as it is legible, so please bring or upload it to complete your application.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "Understood. And if I bring the id card on Thursday, will the decision be made the same day?",
+        "prompt_tokens": 1739,
+        "completion_tokens": 119,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, once you bring the ID card on Thursday we will be able to verify all required documents and make a final decision on the same day, provided no further issues arise.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "One more thing - my sister Aruzhan applied last year and she is on file too.",
+        "prompt_tokens": 1840,
+        "completion_tokens": 297,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, your sister Aruzhan Nurlan (record A-205) is indeed on file. Please bring your ID card on Thursday so we can complete your application and determine the grant amount.\"}"
+      },
+      null,
+      {
+        "kind": "turn",
+        "text": "Sorry, where were we? What is still missing from my file?",
+        "prompt_tokens": 1941,
+        "completion_tokens": 98,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, the only document still missing from your file is your ID card. Please provide it so we can finalize your application.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "And what was the amount again?",
+        "prompt_tokens": 2020,
+        "completion_tokens": 195,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, the grant amount for income band 2 is 150,000 KZT, but we still need your ID card to finalize the award.\"}"
+      }
+    ],
+    "probes": [
+      {
+        "id": "Q-1",
+        "question": "Which applicant am I, and what is my number?",
+        "expect_contains": [
+          "A-202"
+        ],
+        "tests": "identity, stated once in turn 1",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You are Daniyar Qoshan, applicant ID A-202. The only document still missing from your file is your ID card.\"}",
+        "prompt_tokens": 2109
+      },
+      {
+        "id": "Q-2",
+        "question": "Which document is still missing from my file?",
+        "expect_contains": [
+          "id_card",
+          "id card"
+        ],
+        "tests": "the missing document, turn 5",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, the only required document still missing from your file is your ID card.\"}",
+        "prompt_tokens": 2107
+      },
+      {
+        "id": "Q-3",
+        "question": "What is my income band, and what amount does that come to?",
+        "expect_contains": [
+          "150000",
+          "150,000"
+        ],
+        "tests": "the band from turn 3 and the amount from turn 4",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, your record shows income band 2, which qualifies for a grant of 150,000 KZT. The only document still missing is your ID card, so please provide it to complete your application.\"}",
+        "prompt_tokens": 2112
+      },
+      {
+        "id": "Q-4",
+        "question": "Which day of the week can I come to the office?",
+        "expect_contains": [
+          "Thursday"
+        ],
+        "tests": "a constraint the applicant stated in turn 6 and never repeated",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Dear Daniyar Qoshan, you can bring your ID card to our office on Thursday; once we receive it we can finalize your application and award the 150,000 KZT grant.\"}",
+        "prompt_tokens": 2110
+      },
+      {
+        "id": "Q-5",
+        "question": "What did I ask you about my employer?",
+        "expect_contains": [
+          "letter",
+          "employer"
+        ],
+        "tests": "an open question, turn 7, never answered",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You asked whether a scanned letter from your employer would be acceptable or if the original was required. We clarified that the grant only requires a transcript and an ID card, so an employer letter is not needed; the ID card can be submitted as a clear scanned copy or the original.\"}",
+        "prompt_tokens": 2107
+      }
+    ]
+  },
+  "B": {
+    "calls": [
+      {
+        "kind": "turn",
+        "text": "Сәлеметсіз бе! My name is Daniyar Qoshan, applicant A-202.",
+        "prompt_tokens": 997,
+        "completion_tokens": 324,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Hello Daniyar, we found your record (A-202). Your GPA and income band meet the criteria, but we are missing your ID card document. Please submit the ID card to complete your application.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I sent my transcript last week. Do I qualify for the study grant?",
+        "prompt_tokens": 1095,
+        "completion_tokens": 208,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You meet the GPA and income band requirements, but your ID card is still missing from your file. Please provide the ID card to complete the application and qualify for the grant.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "My income band is 2 - my family's certificate says so.",
+        "prompt_tokens": 1185,
+        "completion_tokens": 182,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Your record shows you meet the GPA and income band criteria, but the ID card is still not on file. Please submit your ID card to complete the application and be eligible for the grant.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "So how much would that come to, if it goes through?",
+        "prompt_tokens": 1278,
+        "completion_tokens": 281,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"If your application is completed with the missing ID card, you would qualify for a grant of 150,000 KZT, as you are in income band 2.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I could not upload my id card because the scanner at home broke.",
+        "prompt_tokens": 1368,
+        "completion_tokens": 158,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"We understand your scanner issue. To proceed, please bring a printed copy of your ID card to our office or use another device to scan and upload it. The grant (150,000 KZT) can be awarded once the ID card is on file.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "I can only come to the office on Thursdays, I have lab all week otherwise.",
+        "prompt_tokens": 1479,
+        "completion_tokens": 125,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You can bring your ID card to our office on Thursday; once we receive it, we can finalize your grant of 150,000 KZT.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "Also, does a scanned letter from my employer count, or does it have to be the original?",
+        "prompt_tokens": 1572,
+        "completion_tokens": 210,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"A scanned, clear copy of your employer's letter is acceptable for our records; the original can be shown in person if we need to verify its authenticity. However, you still need to provide the missing ID card before the grant can be approved.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "Understood. And if I bring the id card on Thursday, will the decision be made the same day?",
+        "prompt_tokens": 1685,
+        "completion_tokens": 213,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Yes, if you bring your ID card to our office on Thursday, we can review it and make a final decision on the same day, granting you the 150,000 KZT if all documents are in order.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "One more thing - my sister Aruzhan applied last year and she is on file too.",
+        "prompt_tokens": 1791,
+        "completion_tokens": 654,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"We confirm that your sister Aruzhan Nurlan (record A-205) is in our system and qualifies for a 250,000 KZT grant. Your own application still awaits the ID card, after which you will receive 150,000 KZT.\"}"
+      },
+      {
+        "kind": "compress",
+        "text": "<compress>",
+        "prompt_tokens": 1260,
+        "completion_tokens": 951,
+        "reply": "{\"applicant_id\":\"A-202\",\"topic\":\"Study grant eligibility and submission details\",\"facts\":[\"My name is Daniyar Qoshan, applicant A-202\",\"I sent my transcript last week\",\"My income band is 2 - my family's certificate says so\",\"I could not upload my id card because the scanner at home broke\",\"I can only come to the office on Thursdays, I have lab all week otherwise\",\"One more thing - my sister Aruzhan applied last year and she is on file too\"],\"decisions\":[\"Your GPA and income band meet the criteria\",\"Your ID card is missing and must be submitted to complete the application\",\"If the ID card is provided, you will qualify for a grant of 150,000 KZT\",\"A scanned, clear copy of your employer's letter is acceptable; the original can be shown in person if needed\",\"If you bring the ID card on Thursday, a final decision can be made the same day and the grant can be awarded\",\"Your sister Aruzhan Nurlan (record A-205) qualifies for a 250,000 KZT grant\"],\"constraints\":[\"ID card must be provided before the grant can be approved\",\"You may submit the ID card in person on Thursday\",\"Decision and grant issuance can occur the same day the ID card is received on Thursday\"],\"open_questions\":[],\"language\":\"Kazakh, English\"}",
+        "accepted": true,
+        "errors": []
+      },
+      {
+        "kind": "turn",
+        "text": "Sorry, where were we? What is still missing from my file?",
+        "prompt_tokens": 1321,
+        "completion_tokens": 271,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Your transcript is on file, but the required ID card is still missing. Please provide a clear copy of your ID card (you can bring it in person on Thursday) to complete your application.\"}"
+      },
+      {
+        "kind": "turn",
+        "text": "And what was the amount again?",
+        "prompt_tokens": 1409,
+        "completion_tokens": 170,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"If you submit the missing ID card, you will qualify for a grant of 150,000 KZT (income band 2). Please provide the ID card to complete your application.\"}"
+      }
+    ],
+    "probes": [
+      {
+        "id": "Q-1",
+        "question": "Which applicant am I, and what is my number?",
+        "expect_contains": [
+          "A-202"
+        ],
+        "tests": "identity, stated once in turn 1",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You are Daniyar Qoshan, applicant ID A-202. Your file is missing the required ID card, which must be provided before a grant can be approved.\"}",
+        "prompt_tokens": 1500
+      },
+      {
+        "id": "Q-2",
+        "question": "Which document is still missing from my file?",
+        "expect_contains": [
+          "id_card",
+          "id card"
+        ],
+        "tests": "the missing document, turn 5",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Your file is missing the ID card; once you provide it, we can finalize your grant application.\"}",
+        "prompt_tokens": 1498
+      },
+      {
+        "id": "Q-3",
+        "question": "What is my income band, and what amount does that come to?",
+        "expect_contains": [
+          "150000",
+          "150,000"
+        ],
+        "tests": "the band from turn 3 and the amount from turn 4",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Your income band is 2, which corresponds to a grant amount of 150,000 KZT once all required documents (including the ID card) are provided.\"}",
+        "prompt_tokens": 1503
+      },
+      {
+        "id": "Q-4",
+        "question": "Which day of the week can I come to the office?",
+        "expect_contains": [
+          "Thursday"
+        ],
+        "tests": "a constraint the applicant stated in turn 6 and never repeated",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You can come to the office on Thursday to submit your ID card.\"}",
+        "prompt_tokens": 1501
+      },
+      {
+        "id": "Q-5",
+        "question": "What did I ask you about my employer?",
+        "expect_contains": [
+          "letter",
+          "employer"
+        ],
+        "tests": "an open question, turn 7, never answered",
+        "retrieved": true,
+        "reply": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"You asked whether a document from your employer could be submitted as a scan; we replied that a clear scanned copy of your employer's letter is acceptable, with the original shown in person if needed.\"}",
+        "prompt_tokens": 1498
+      }
+    ],
+    "state": {
+      "applicant_id": "A-202",
+      "topic": "Study grant eligibility and submission details",
+      "facts": [
+        "My name is Daniyar Qoshan, applicant A-202",
+        "I sent my transcript last week",
+        "My income band is 2 - my family's certificate says so",
+        "I could not upload my id card because the scanner at home broke",
+        "I can only come to the office on Thursdays, I have lab all week otherwise",
+        "One more thing - my sister Aruzhan applied last year and she is on file too"
+      ],
+      "decisions": [
+        "Your GPA and income band meet the criteria",
+        "Your ID card is missing and must be submitted to complete the application",
+        "If the ID card is provided, you will qualify for a grant of 150,000 KZT",
+        "A scanned, clear copy of your employer's letter is acceptable; the original can be shown in person if needed",
+        "If you bring the ID card on Thursday, a final decision can be made the same day and the grant can be awarded",
+        "Your sister Aruzhan Nurlan (record A-205) qualifies for a 250,000 KZT grant"
+      ],
+      "constraints": [
+        "ID card must be provided before the grant can be approved",
+        "You may submit the ID card in person on Thursday",
+        "Decision and grant issuance can occur the same day the ID card is received on Thursday"
+      ],
+      "open_questions": [],
+      "language": "Kazakh, English"
+    }
+  }
+}

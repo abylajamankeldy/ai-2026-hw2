@@ -1,0 +1,1026 @@
+{
+  "policy_officer": [
+    {
+      "role": "policy_officer",
+      "enquiry": "E-01",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA, income band, and required documents; grant approved.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA, income band, and required documents; grant approved."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1179,
+      "completion_tokens": 234
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-02",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant meets GPA and income band requirements but is missing the required id_card document.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant meets GPA and income band requirements but is missing the required id_card document."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1179,
+      "completion_tokens": 173
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-03",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant found but GPA 2.4 is below the required minimum of 2.67, so the application is refused.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant found but GPA 2.4 is below the required minimum of 2.67, so the application is refused."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1176,
+      "completion_tokens": 227
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-04",
+      "raw": "{\"applicant_id\":\"A-204\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant Yerlan Tolegen meets the GPA requirement but his income band (3) is not eligible, so the grant is refused.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-204",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant Yerlan Tolegen meets the GPA requirement but his income band (3) is not eligible, so the grant is refused."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1173,
+      "completion_tokens": 228
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-05",
+      "raw": "{\"applicant_id\":\"A-205\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA requirement, is in an eligible income band, and has both required documents on file; grant approved.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-205",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA requirement, is in an eligible income band, and has both required documents on file; grant approved."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1179,
+      "completion_tokens": 203
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-06",
+      "raw": "{\"applicant_id\":\"A-206\",\"found\":true,\"decision\":\"granted\",\"amount\":150000,\"missing_documents\":[],\"reason\":\"Applicant meets GPA, income band, and required documents. Grant of 150,000 tenge approved.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-206",
+        "found": true,
+        "decision": "granted",
+        "amount": 150000,
+        "missing_documents": [],
+        "reason": "Applicant meets GPA, income band, and required documents. Grant of 150,000 tenge approved."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1170,
+      "completion_tokens": 258
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-07",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Applicant meets GPA, income band, and has all required documents, so the grant is approved.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Applicant meets GPA, income band, and has all required documents, so the grant is approved."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1179,
+      "completion_tokens": 220
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-08",
+      "raw": "{\"applicant_id\":\"A-999\",\"found\":false,\"decision\":\"not_found\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant not found in the records.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-999",
+        "found": false,
+        "decision": "not_found",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant not found in the records."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1174,
+      "completion_tokens": 236
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-09",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant is in the records but their GPA of 2.4 is below the required minimum of 2.67, so the grant is refused.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant is in the records but their GPA of 2.4 is below the required minimum of 2.67, so the grant is refused."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1172,
+      "completion_tokens": 253
+    },
+    {
+      "role": "policy_officer",
+      "enquiry": "E-10",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant meets GPA and income band requirements but the required id_card document is not on file.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant meets GPA and income band requirements but the required id_card document is not on file."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1179,
+      "completion_tokens": 233
+    }
+  ],
+  "front_desk": [
+    {
+      "role": "front_desk",
+      "enquiry": "E-01",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"You meet all eligibility criteria and are granted the study grant of 250,000 KZT.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "You meet all eligibility criteria and are granted the study grant of 250,000 KZT."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 162
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-02",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant meets GPA and income band requirements but is missing the required ID card document; please submit it to complete the application.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant meets GPA and income band requirements but is missing the required ID card document; please submit it to complete the application."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 239
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-03",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Your GPA of 2.4 is below the required minimum of 2.67. Please provide an updated GPA that meets the threshold to qualify.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Your GPA of 2.4 is below the required minimum of 2.67. Please provide an updated GPA that meets the threshold to qualify."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1124,
+      "completion_tokens": 295
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-04",
+      "raw": "{\"applicant_id\":\"A-204\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Income band 3 is not eligible; only income bands 1 or 2 qualify for the grant.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-204",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Income band 3 is not eligible; only income bands 1 or 2 qualify for the grant."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1121,
+      "completion_tokens": 354
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-05",
+      "raw": "{\"applicant_id\":\"A-205\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"You meet all eligibility criteria and will receive 250,000 KZT.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-205",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "You meet all eligibility criteria and will receive 250,000 KZT."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 205
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-06",
+      "raw": "{\"applicant_id\":\"A-206\",\"found\":true,\"decision\":\"granted\",\"amount\":150000,\"missing_documents\":[],\"reason\":\"Applicant meets all eligibility criteria and is granted 150,000 KZT.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-206",
+        "found": true,
+        "decision": "granted",
+        "amount": 150000,
+        "missing_documents": [],
+        "reason": "Applicant meets all eligibility criteria and is granted 150,000 KZT."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1118,
+      "completion_tokens": 239
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-07",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"You meet all eligibility criteria (GPA 3.4, income band 1, required documents on file) and are granted 250,000 KZT.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "You meet all eligibility criteria (GPA 3.4, income band 1, required documents on file) and are granted 250,000 KZT."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 214
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-08",
+      "raw": "{\"applicant_id\":\"A-999\",\"found\":false,\"decision\":\"not_found\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant not found in the records.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-999",
+        "found": false,
+        "decision": "not_found",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant not found in the records."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1122,
+      "completion_tokens": 180
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-09",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Your GPA (2.4) is below the required minimum of 2.67. To qualify, your GPA must be at least 2.67.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Your GPA (2.4) is below the required minimum of 2.67. To qualify, your GPA must be at least 2.67."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1120,
+      "completion_tokens": 266
+    },
+    {
+      "role": "front_desk",
+      "enquiry": "E-10",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Your application is missing the required id_card document. Please upload it to complete the file.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Your application is missing the required id_card document. Please upload it to complete the file."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 176
+    }
+  ],
+  "auditor": [
+    {
+      "role": "auditor",
+      "enquiry": "E-01",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA ≥2.67, allowed income band, and required documents per the grant rule, but requires a second review before granting.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA ≥2.67, allowed income band, and required documents per the grant rule, but requires a second review before granting."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": false,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1134,
+      "completion_tokens": 229
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-02",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant meets GPA and income band criteria but is missing the required id_card document according to the grant rule.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant meets GPA and income band criteria but is missing the required id_card document according to the grant rule."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1134,
+      "completion_tokens": 257
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-03",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant fails the GPA requirement of at least 2.67 as per the grant rule.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant fails the GPA requirement of at least 2.67 as per the grant rule."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1131,
+      "completion_tokens": 252
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-04",
+      "raw": "{\"applicant_id\":\"A-204\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Income band 3 is not in the allowed bands (1 or 2); therefore the grant is refused.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-204",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Income band 3 is not in the allowed bands (1 or 2); therefore the grant is refused."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1128,
+      "completion_tokens": 331
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-05",
+      "raw": "{\"applicant_id\":\"A-205\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA (≥2.67), income band (1) and required documents per the Need-based study grant 2026 rule, but a second review is required before granting.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-205",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA (≥2.67), income band (1) and required documents per the Need-based study grant 2026 rule, but a second review is required before granting."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": false,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1134,
+      "completion_tokens": 321
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-06",
+      "raw": "{\"applicant_id\":\"A-206\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA (>=2.67), income band (1 or 2), and has both transcript and ID card per the grant rule, but a second review is required.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-206",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA (>=2.67), income band (1 or 2), and has both transcript and ID card per the grant rule, but a second review is required."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": false,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1125,
+      "completion_tokens": 318
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-07",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant meets GPA, income band, and document requirements per the grant rule, but as auditor we cannot grant on first reading; further review is required.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant meets GPA, income band, and document requirements per the grant rule, but as auditor we cannot grant on first reading; further review is required."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": false,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1134,
+      "completion_tokens": 230
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-08",
+      "raw": "{\"applicant_id\":\"A-999\",\"found\":false,\"decision\":\"not_found\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant not found in the grant records; therefore does not qualify.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-999",
+        "found": false,
+        "decision": "not_found",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant not found in the grant records; therefore does not qualify."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1129,
+      "completion_tokens": 159
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-09",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant does not meet the minimum GPA of 2.67 required by the grant rule.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant does not meet the minimum GPA of 2.67 required by the grant rule."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1127,
+      "completion_tokens": 226
+    },
+    {
+      "role": "auditor",
+      "enquiry": "E-10",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant A-202 lacks the required id_card document according to the records, so the grant criteria are not met.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant A-202 lacks the required id_card document according to the records, so the grant criteria are not met."
+      },
+      "agrees": {
+        "found": true,
+        "decision": false,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": false,
+      "prompt_tokens": 1134,
+      "completion_tokens": 447
+    }
+  ],
+  "bilingual_clerk": [
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-01",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Applicant meets the GPA, income band, and required documents criteria, so the grant is approved for 250,000 KZT.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Applicant meets the GPA, income band, and required documents criteria, so the grant is approved for 250,000 KZT."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1152,
+      "completion_tokens": 266
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-02",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"Applicant is missing the required ID card document.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "Applicant is missing the required ID card document."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1152,
+      "completion_tokens": 236
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-03",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant does not meet the minimum GPA requirement of 2.67.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant does not meet the minimum GPA requirement of 2.67."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1149,
+      "completion_tokens": 248
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-04",
+      "raw": "{\"applicant_id\":\"A-204\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant Yerlan Tolegen does not qualify because his income band (3) is not among the allowed bands (1 or 2).\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-204",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant Yerlan Tolegen does not qualify because his income band (3) is not among the allowed bands (1 or 2)."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1146,
+      "completion_tokens": 284
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-05",
+      "raw": "{\"applicant_id\":\"A-205\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Your GPA, income band, and required documents satisfy the eligibility criteria. You are eligible for a grant of 250,000 tenge.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-205",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Your GPA, income band, and required documents satisfy the eligibility criteria. You are eligible for a grant of 250,000 tenge."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1152,
+      "completion_tokens": 294
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-06",
+      "raw": "{\"applicant_id\":\"A-206\",\"found\":true,\"decision\":\"granted\",\"amount\":150000,\"missing_documents\":[],\"reason\":\"The applicant meets the minimum GPA, is in an eligible income band, and has both required documents, so the grant is awarded.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-206",
+        "found": true,
+        "decision": "granted",
+        "amount": 150000,
+        "missing_documents": [],
+        "reason": "The applicant meets the minimum GPA, is in an eligible income band, and has both required documents, so the grant is awarded."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1143,
+      "completion_tokens": 235
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-07",
+      "raw": "{\"applicant_id\":\"A-201\",\"found\":true,\"decision\":\"granted\",\"amount\":250000,\"missing_documents\":[],\"reason\":\"Сіздің GPA-ңыз 3.4, табыс тобы 1 және қажет құжаттар (транскрипт және жеке куәлік) бар, сондықтан грант берілді.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-201",
+        "found": true,
+        "decision": "granted",
+        "amount": 250000,
+        "missing_documents": [],
+        "reason": "Сіздің GPA-ңыз 3.4, табыс тобы 1 және қажет құжаттар (транскрипт және жеке куәлік) бар, сондықтан грант берілді."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1152,
+      "completion_tokens": 291
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-08",
+      "raw": "{\"applicant_id\":\"A-999\",\"found\":false,\"decision\":\"not_found\",\"amount\":0,\"missing_documents\":[],\"reason\":\"Applicant not found in the records, therefore does not qualify.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-999",
+        "found": false,
+        "decision": "not_found",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "Applicant not found in the records, therefore does not qualify."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1147,
+      "completion_tokens": 223
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-09",
+      "raw": "{\"applicant_id\":\"A-203\",\"found\":true,\"decision\":\"refused\",\"amount\":0,\"missing_documents\":[],\"reason\":\"You do not qualify because your GPA of 2.4 is below the required minimum of 2.67.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-203",
+        "found": true,
+        "decision": "refused",
+        "amount": 0,
+        "missing_documents": [],
+        "reason": "You do not qualify because your GPA of 2.4 is below the required minimum of 2.67."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1145,
+      "completion_tokens": 238
+    },
+    {
+      "role": "bilingual_clerk",
+      "enquiry": "E-10",
+      "raw": "{\"applicant_id\":\"A-202\",\"found\":true,\"decision\":\"more_info\",\"amount\":0,\"missing_documents\":[\"id_card\"],\"reason\":\"The applicant meets the GPA and income band requirements, but the required id_card document is missing, so the grant cannot be granted until it is provided.\"}",
+      "parsed": true,
+      "schema_valid": true,
+      "schema_errors": [],
+      "reply": {
+        "applicant_id": "A-202",
+        "found": true,
+        "decision": "more_info",
+        "amount": 0,
+        "missing_documents": [
+          "id_card"
+        ],
+        "reason": "The applicant meets the GPA and income band requirements, but the required id_card document is missing, so the grant cannot be granted until it is provided."
+      },
+      "agrees": {
+        "found": true,
+        "decision": true,
+        "amount": true,
+        "missing_documents": true
+      },
+      "all_agree": true,
+      "prompt_tokens": 1152,
+      "completion_tokens": 292
+    }
+  ]
+}
