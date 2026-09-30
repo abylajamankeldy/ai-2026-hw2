@@ -22,23 +22,25 @@ RESULTS = ROOT / "results"
 
 load_dotenv(ROOT / ".env")
 
-# Provider. The assignment's model is OpenAI gpt-5.6-luna. If only a GEMINI_API_KEY
-# is set (free tier, no card), the same code talks to Google's OpenAI-compatible
-# endpoint instead - the program sends exactly the same messages either way.
-GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-if os.environ.get("OPENAI_API_KEY", "").startswith("sk-") and os.environ["OPENAI_API_KEY"] != "sk-...":
-    PROVIDER = "openai"
-    MODEL = os.environ.get("HW2_MODEL", "gpt-5.6-luna")
-    MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "0"))
-elif os.environ.get("GEMINI_API_KEY"):
-    PROVIDER = "gemini"
-    MODEL = os.environ.get("HW2_MODEL", "gemini-3.8-flash")
-    # free tier allows ~10-15 requests per minute: space the calls out
-    MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", "6.5"))
-else:
-    PROVIDER = None
-    MODEL = os.environ.get("HW2_MODEL", "gpt-5.6-luna")
-    MIN_INTERVAL = 0.0
+# Provider. The assignment's model is OpenAI gpt-5.6-luna. Without an OpenAI key
+# the same code can talk to a free OpenAI-compatible endpoint instead - the
+# program sends exactly the same messages either way; only the model differs.
+# The first key found in .env wins, in this order:
+#   name       env var             base url                                            default model          pause between calls
+PROVIDERS = [
+    ("openai",  "OPENAI_API_KEY",  None,                                               "gpt-5.6-luna",        0.0),
+    ("github",  "GITHUB_MODELS_TOKEN", "https://models.github.ai/inference",               "openai/gpt-4.1-mini", 4.5),
+    ("groq",    "GROQ_API_KEY",    "https://api.groq.com/openai/v1",                   "llama-3.3-70b-versatile", 2.5),
+    ("gemini",  "GEMINI_API_KEY",  "https://generativelanguage.googleapis.com/v1beta/openai/", "gemini-3.8-flash", 6.5),
+]
+PROVIDER, API_KEY, BASE_URL, MODEL, MIN_INTERVAL = None, None, None, "gpt-5.6-luna", 0.0
+for _name, _env, _url, _model, _pause in PROVIDERS:
+    _key = os.environ.get(_env, "").strip()
+    if _key and _key not in ("sk-...", "..."):
+        PROVIDER, API_KEY, BASE_URL, MODEL, MIN_INTERVAL = _name, _key, _url, _model, _pause
+        break
+MODEL = os.environ.get("HW2_MODEL") or MODEL
+MIN_INTERVAL = float(os.environ.get("HW2_MIN_INTERVAL", MIN_INTERVAL))
 
 # Windows consoles default to cp1251/cp866 and would crash on Kazakh letters and ✓/→.
 for _s in (sys.stdout, sys.stderr):
@@ -100,12 +102,9 @@ def client():
     if _client is None:
         from openai import OpenAI
 
-        if PROVIDER == "openai":
-            _client = OpenAI()
-        elif PROVIDER == "gemini":
-            _client = OpenAI(api_key=os.environ["GEMINI_API_KEY"], base_url=GEMINI_BASE_URL)
-        else:
-            sys.exit("No API key. Put OPENAI_API_KEY=sk-... or GEMINI_API_KEY=... in .env (see .env.example).")
+        if PROVIDER is None:
+            sys.exit("No API key in .env. Set one of: " + ", ".join(p[1] for p in PROVIDERS) + " (see .env.example).")
+        _client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
         print(f"[provider: {PROVIDER}, model: {MODEL}]", flush=True)
     return _client
 
@@ -133,9 +132,10 @@ def chat(messages: list[dict], *, json_mode: bool = True, max_tokens: int = 4000
     """
     kwargs: dict[str, Any] = {"model": MODEL, "messages": messages}
     optional = {
-        ("max_tokens" if PROVIDER == "gemini" else "max_completion_tokens"): max_tokens,
-        "reasoning_effort": "low",
+        ("max_completion_tokens" if PROVIDER == "openai" else "max_tokens"): max_tokens,
     }
+    if PROVIDER == "openai":
+        optional["reasoning_effort"] = "low"
     if json_mode:
         optional["response_format"] = {"type": "json_object"}
     for k, v in optional.items():
