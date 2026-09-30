@@ -29,8 +29,7 @@ load_dotenv(ROOT / ".env")
 #   name       env var             base url                                            default model          pause between calls
 PROVIDERS = [
     ("openai",  "OPENAI_API_KEY",  None,                                               "gpt-5.6-luna",        0.0),
-    ("github",  "GITHUB_MODELS_TOKEN", "https://models.github.ai/inference",               "openai/gpt-4.1-mini", 4.5),
-    ("groq",    "GROQ_API_KEY",    "https://api.groq.com/openai/v1",                   "llama-3.3-70b-versatile", 2.5),
+    ("groq",    "GROQ_API_KEY",    "https://api.groq.com/openai/v1",                   "openai/gpt-oss-120b", 2.5),
     ("gemini",  "GEMINI_API_KEY",  "https://generativelanguage.googleapis.com/v1beta/openai/", "gemini-3.8-flash", 6.5),
 ]
 PROVIDER, API_KEY, BASE_URL, MODEL, MIN_INTERVAL = None, None, None, "gpt-5.6-luna", 0.0
@@ -167,6 +166,9 @@ def chat(messages: list[dict], *, json_mode: bool = True, max_tokens: int = 4000
     else:
         raise RuntimeError("model call failed after retries")
 
+    if isinstance(resp, str) or not getattr(resp, "choices", None):
+        sys.exit(f"The API at {BASE_URL or 'api.openai.com'} returned something that is not a chat completion "
+                 f"(wrong endpoint or model?): {str(resp)[:300]}")
     u = resp.usage
     return {
         "text": resp.choices[0].message.content or "",
