@@ -10,17 +10,17 @@
 Run:  python -m sublab_hard.cv_extract_and_rank
 """
 from __future__ import annotations
-
+# json — чтобы превращать CV в текст и обратно
 import json
-
+# Общие функции из common/llm.py
 from common.llm import DATA, chat, load_json, parse_json, save_result, validate
-
+# Данные: рубрика оценки, 6 историй кандидатов (просто текст) и веса критериев 0.5 / 0.3 / 0.2
 RUBRIC = load_json("candidate_rubric.json")
 STORIES = {p.stem: p.read_text(encoding="utf-8") for p in sorted((DATA / "candidates").glob("story-*.md"))}
 WEIGHTS = {c["id"]: c["weight"] for c in RUBRIC["criteria"]}
-
+# Форма CV, которую должна вернуть модель (JSON Schema). null разрешён там, где факта может не быть
 # ------------------------------------------------------------------ the CV record
-NULLABLE_STR = {"type": ["string", "null"]}
+NULLABLE_STR = {"type": ["string", "null"]}  # строка или null
 CV_SCHEMA = {
     "type": "object",
     "properties": {
@@ -62,9 +62,9 @@ CV_SCHEMA = {
                  "gpa_4_scale", "languages", "published_outputs", "published_peer_reviewed_count",
                  "not_counted_outputs", "experience_periods", "experience_months_countable", "evidence",
                  "ambiguities", "story_language"],
-    "additionalProperties": False,
+    "additionalProperties": False,  # лишние поля запрещены
 }
-
+# Правила извлечения R1–R7. Они ВСТАВЛЯЮТСЯ В ПРОМПТ: модель знает только то, что в нём написано
 EXTRACTION_RULES = """RULES - follow them exactly, they matter more than a tidy record:
 R1. MISSING = NULL. A fact the story does not state is null. Never estimate. No GPA stated means gpa_original, gpa_original_scale and gpa_4_scale are all null - never infer a GPA from the degree, the honours ("with distinction"), the university or the impression the story gives.
 R2. GPA SCALE. If the GPA is on another scale, convert it linearly to a 4.0 scale: gpa_4_scale = gpa_original / gpa_original_scale * 4, rounded to 2 decimals. Always record gpa_original and gpa_original_scale beside it (for a 4.0 GPA, the scale is 4.0).
@@ -74,7 +74,7 @@ R5. EXPERIENCE. Count months, not jobs. Overlapping periods count once. A period
 R6. EVIDENCE. For every field you fill, evidence holds a short verbatim quote from the story (in the story's own language). If the field is null, evidence is null, or the quote that shows the contradiction.
 R7. Do not translate names; write them as the story does. Output English for everything else."""
 
-
+# Системный промпт для извлечения: правила + правила рубрики + шаблон JSON
 def extraction_prompt() -> str:
     return (
         "You turn one scholarship application story into a structured CV record for a committee.\n\n"
@@ -102,7 +102,7 @@ def extraction_prompt() -> str:
         }, indent=1)
     )
 
-
+# Промпт для оценки: модель ставит только 3 целых числа 0–5, сумму считает код
 SCORING_PROMPT = (
     "You score one scholarship candidate against a rubric. You receive the candidate's extracted CV record.\n"
     "Give an integer score from 0 to 5 for each of the three criteria, using the anchors below; interpolate "
@@ -114,13 +114,13 @@ SCORING_PROMPT = (
     'Return ONE JSON object: {"academic": int 0-5, "research": int 0-5, "experience": int 0-5, '
     '"why": {"academic": "one short sentence", "research": "...", "experience": "..."}}'
 )
-
+# Схема ответа оценщика: три целых числа от 0 до 5
 SCORE_SCHEMA = {
     "type": "object",
     "properties": {c: {"type": "integer", "minimum": 0, "maximum": 5} for c in WEIGHTS} | {"why": {"type": "object"}},
     "required": list(WEIGHTS),
 }
-
+# Промпт для отдельного вопроса прозой «кто должен победить?» — чтобы сравнить с расчётом кода
 PROSE_PROMPT = (
     "You advise a scholarship committee. There is one funded place and six candidates. Read their application "
     "stories and the rubric, and answer in a few paragraphs of prose: which candidate should win, and why? "
@@ -128,35 +128,35 @@ PROSE_PROMPT = (
     f"RUBRIC: {json.dumps(RUBRIC, ensure_ascii=False)}"
 )
 
-
+# ===== Проверки кодом: то, что можно посчитать без модели =====
 # -------------------------------------------------------------- code-side checks
 def code_checks(cv: dict) -> list[str]:
     """Things the program can verify without trusting the model."""
-    notes = []
+    notes = []  # сюда пишем найденные расхождения
     o, s, g4 = cv.get("gpa_original"), cv.get("gpa_original_scale"), cv.get("gpa_4_scale")
-    if o is not None and s:
-        expect = round(o / s * 4, 2)
+    if o is not None and s:  # GPA указан -> пересчитываем сами
+        expect = round(o / s * 4, 2)  # например 4.6 / 5 * 4 = 3.68
         if g4 is None or abs(expect - g4) > 0.011:
             notes.append(f"GPA conversion: model gave {g4}, code computes {o}/{s}*4 = {expect}")
-    if g4 is not None and o is None:
+    if g4 is not None and o is None:  # GPA есть, а исходного нет — похоже на угадывание
         notes.append("gpa_4_scale filled but no original GPA recorded (possible estimate)")
-    n = len(cv.get("published_outputs") or [])
+    n = len(cv.get("published_outputs") or [])  # сколько статей в списке
     if cv.get("published_peer_reviewed_count") != n:
         notes.append(f"publication count {cv.get('published_peer_reviewed_count')} != {n} items listed")
-    periods = cv.get("experience_periods") or []
+    periods = cv.get("experience_periods") or []  # периоды работы
     summed = sum(p.get("months") or 0 for p in periods if p.get("countable"))
     if periods and cv.get("experience_months_countable") not in (None, summed):
         notes.append(f"experience months {cv.get('experience_months_countable')} != sum of countable periods {summed} "
                      "(overlap? check)")
     return notes
 
-
+# Какие главные поля пришли пустыми (null)
 def null_fields(cv: dict) -> list[str]:
     keys = ["full_name", "degree", "graduation_year", "gpa_original", "gpa_original_scale", "gpa_4_scale",
             "experience_months_countable"]
     return [k for k in keys if cv.get(k) is None]
 
-
+# Какие ловушки сработали в этой истории — для таблицы в SUBMISSION
 def traps_hit(cv: dict) -> list[str]:
     t = []
     if cv.get("gpa_4_scale") is None and not any("gpa" in a.lower() for a in cv.get("ambiguities", [])):
@@ -171,28 +171,28 @@ def traps_hit(cv: dict) -> list[str]:
         t.append("undated experience not counted")
     return t or ["none"]
 
-
+# Текст для ячейки таблицы
 def md(s, n=200) -> str:
     s = " ".join(str(s).split()).replace("|", "\\|")
     return s if len(s) <= n else s[: n - 1] + "…"
 
-
+# Главная функция: извлечение -> оценка -> итог кодом -> рейтинг -> проза
 # ------------------------------------------------------------------------- main
 def main() -> None:
     out = []
     cvs: dict[str, dict] = {}
     extraction_rows = []
-
+    # Часть 1: для каждой истории отдельный вызов, модель делает CV
     print("== Part 1: extraction")
-    sys_ext = extraction_prompt()
-    for sid, story in STORIES.items():
+    sys_ext = extraction_prompt()  # промпт с правилами — один на все истории
+    for sid, story in STORIES.items():  # 6 историй
         r = chat([{"role": "system", "content": sys_ext},
                   {"role": "user", "content": f"candidate_id: {sid}\n\nSTORY:\n{story}"}], max_tokens=6000)
-        obj, perr = parse_json(r["text"])
-        errors = [perr] if obj is None else validate(obj, CV_SCHEMA)
+        obj, perr = parse_json(r["text"])  # текст -> JSON
+        errors = [perr] if obj is None else validate(obj, CV_SCHEMA)  # проверка формы CV
         row = {"id": sid, "raw": r["text"], "parsed": obj is not None, "valid": obj is not None and not errors,
                "errors": errors, "cv": obj}
-        if isinstance(obj, dict):
+        if isinstance(obj, dict):  # CV получилось: null-поля, ловушки, проверки кодом
             cvs[sid] = obj
             row["nulls"] = null_fields(obj)
             row["traps"] = traps_hit(obj)
@@ -202,7 +202,7 @@ def main() -> None:
               f"gpa4={obj.get('gpa_4_scale') if isinstance(obj, dict) else '?'} "
               f"pubs={obj.get('published_peer_reviewed_count') if isinstance(obj, dict) else '?'} "
               f"months={obj.get('experience_months_countable') if isinstance(obj, dict) else '?'}", flush=True)
-
+    # Таблица извлечения: распарсилось, прошло схему, какие поля null, какие ловушки
     out.append("### Part 1 — extraction\n")
     out.append("| Story | Parsed? | Valid? | Fields that came back `null` | Traps hit | Code checks |")
     out.append("|---|---|---|---|---|---|")
@@ -211,7 +211,7 @@ def main() -> None:
                    f"{'yes' if row['valid'] else 'NO: ' + md('; '.join(row['errors']), 120)} | "
                    f"{', '.join(row.get('nulls', [])) or 'none'} | {md('; '.join(row.get('traps', [])))} | "
                    f"{md('; '.join(row.get('code_checks', [])) or 'ok')} |")
-
+    # Таблица значений: GPA, статьи, месяцы, противоречия
     out.append("\n#### Extracted values at a glance\n")
     out.append("| Story | name | degree | grad year | GPA (orig/scale → 4.0) | published | not counted | months | ambiguities |")
     out.append("|---|---|---|---|---|---|---|---|---|")
@@ -222,28 +222,28 @@ def main() -> None:
                    f"{gpa} | {cv.get('published_peer_reviewed_count')} | "
                    f"{md(', '.join(o['title'] + ' (' + o['status'] + ')' for o in cv.get('not_counted_outputs', [])), 120)} | "
                    f"{cv.get('experience_months_countable')} | {md('; '.join(cv.get('ambiguities', [])), 200)} |")
-
+    # Полный JSON для story-06 (история с противоречием)
     out.append("\n#### Extraction for story-06 (the one that contradicts itself)\n")
     out.append("```json\n" + json.dumps(cvs.get("story-06"), ensure_ascii=False, indent=2) + "\n```")
-
+    # Часть 2: оценка. Модель ставит 3 числа, итог считает код
     # ------------------------------------------------------------ Part 2: scoring
     print("\n== Part 2: scoring (model gives 0-5 per criterion; code computes the rest)")
     scores = {}
-    for sid, cv in cvs.items():
+    for sid, cv in cvs.items():  # по каждому CV — отдельный вызов оценщика
         r = chat([{"role": "system", "content": SCORING_PROMPT},
                   {"role": "user", "content": json.dumps(cv, ensure_ascii=False)}])
-        obj, perr = parse_json(r["text"])
-        errs = [perr] if obj is None else validate(obj, SCORE_SCHEMA)
-        if errs:
+        obj, perr = parse_json(r["text"])  # ответ оценщика -> JSON
+        errs = [perr] if obj is None else validate(obj, SCORE_SCHEMA)  # проверка: 3 целых числа 0–5
+        if errs:  # плохой ответ — кандидата не считаем
             print(f"  {sid}: score reply invalid ({errs}); scoring as None")
             scores[sid] = {"valid": False, "raw": r["text"], "errors": errs}
             continue
         # THE CODE computes the total - the model was never asked for it
-        total = round(sum(WEIGHTS[c] * obj[c] for c in WEIGHTS), 2)
+        total = round(sum(WEIGHTS[c] * obj[c] for c in WEIGHTS), 2)  # 0.5*academic + 0.3*research + 0.2*experience
         scores[sid] = {"valid": True, **{c: obj[c] for c in WEIGHTS}, "why": obj.get("why", {}), "total": total,
                        "raw": r["text"]}
         print(f"  {sid}: " + " ".join(f"{c}={obj[c]}" for c in WEIGHTS) + f"  -> total {total}")
-
+    # Рейтинг: сортируем по итогу, от большего к меньшему
     ranked = sorted((s for s in scores if scores[s]["valid"]), key=lambda s: -scores[s]["total"])
     out.append("\n### Part 2 — scores and the winner\n")
     out.append("| Candidate | name | academic (0–5) | research (0–5) | experience (0–5) | weighted total (code) | rank |")
@@ -257,20 +257,20 @@ def main() -> None:
         out.append(f"| {sid} | {name} | {s['academic']} | {s['research']} | {s['experience']} | {s['total']:.2f} | "
                    f"{ranked.index(sid) + 1} |")
     out.append("\nTotal = 0.5·academic + 0.3·research + 0.2·experience, rounded to 2 decimals, computed in Python.\n")
-
+    # Короткие объяснения модели к каждой оценке (в расчёте не участвуют)
     out.append("Model's one-line justification per score (not used in the computation):\n")
     for sid in ranked:
         w = scores[sid]["why"]
         out.append(f"- **{sid}**: academic — {md(w.get('academic', ''), 150)}; research — {md(w.get('research', ''), 150)}; "
                    f"experience — {md(w.get('experience', ''), 150)}")
-
+    # Победитель = первый в рейтинге; проверяем ничью и разрыв между первыми двумя
     winner = ranked[0] if ranked else None
     if winner:
         gap = round(scores[ranked[0]]["total"] - scores[ranked[1]]["total"], 2) if len(ranked) > 1 else None
         tied = [s for s in ranked if scores[s]["total"] == scores[winner]["total"]]
         out.append(f"\n**Winner, computed by my code:** {winner} ({cvs[winner].get('full_name')}), "
                    f"total {scores[winner]['total']:.2f}")
-        if len(tied) > 1:
+        if len(tied) > 1:  # ничья: код сам не выбирает, решает комиссия
             out.append(f"\n⚠ TIE at the top: {', '.join(tied)} all have {scores[winner]['total']:.2f}. "
                        "Code does not break the tie on its own - the committee must decide (see written answer 5).")
         if gap is not None:
@@ -278,17 +278,17 @@ def main() -> None:
                        f"{scores[ranked[1]]['total']:.2f}. Gap between the top two: {gap:.2f}"
                        + (" — within 0.05, too close to call on these scores." if gap <= 0.05 else "."))
         out.append("\nFull computed ranking: " + " > ".join(f"{s} ({scores[s]['total']:.2f})" for s in ranked))
-
+    # Часть 3: отдельный вызов — спрашиваем модель прозой, кто должен победить
     # ------------------------------------------------------------ prose, separately
     print("\n== Part 2b: the model's prose answer (separate call)")
     stories_block = "\n\n".join(f"=== {sid} ===\n{text}" for sid, text in STORIES.items())
     r = chat([{"role": "system", "content": PROSE_PROMPT},
               {"role": "user", "content": stories_block + "\n\nWhich candidate should win the funded place?"}],
-             json_mode=False)
+             json_mode=False)  # здесь нужен обычный текст, а не JSON
     prose = r["text"].strip()
     out.append("\n**The model's prose answer, asked separately (\"who should win?\"):**\n")
     out.append("\n".join("> " + line for line in prose.splitlines()))
-
+    # печатаем всё и сохраняем в results/
     text = "\n".join(out)
     print("\n" + text)
     save_result("hard_tables.md", text)
@@ -298,6 +298,6 @@ def main() -> None:
                 "\n\n```\n" + SCORING_PROMPT + "\n```\n\n## Prose system prompt\n\n```\n" + PROSE_PROMPT + "\n```\n")
     print("\nSaved: results/hard_tables.md, results/hard_raw.json, results/hard_prompts.md")
 
-
+# Запуск через python -m sublab_hard.cv_extract_and_rank
 if __name__ == "__main__":
     main()
